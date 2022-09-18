@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .scroll-bar::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      .cart-item-style {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.349);
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar starts here -->
+    <div class="navbar bg-slate-700 yellow">
+      <div class="flex-1">
+        <div class="flex text-white items-center ml-10">
+          <img src="./images/logo.png" class="w-10 md:w-20" alt="" />
+          <span class="text-xl md:text-5xl ml-2 font-bold">PIXEL STORE</span>
+        </div>
+      </div>
+      <div class="flex-none gap-2">
+        <ul class="hidden md:flex">
+          <li class="ml-10 text-2xl" onclick="navigateToHomePage()">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i class="fa-solid fa-house mr-2 text-warning"></i>Home</a
+            >
+          </li>
+
+          <li class="ml-10 text-2xl" onclick="navigateToWishListPage()">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i class="fa-solid fa-heart text-warning mr-2"></i>WishList</a
+            >
+          </li>
+
+          <li class="ml-10">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold text-2xl"
+              ><i class="fa-solid fa-trash mr-2 text-warning"></i>Recycle Bin</a
+            >
+          </li>
+
+          <li class="mx-10 relative">
+            <label
+              for="my-drawer-4"
+              class="drawer-button text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i
+                class="fa-solid fa-cart-shopping mr-2 text-warning text-2xl"
+              ></i>
+            </label>
+            <div class="badge badge-secondary absolute right-[-82%] top-[-45%]">
+              <span id="badge-count">0</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="dropdown dropdown-end md:hidden">
+          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+            <i class="fa-solid fa-bars text-white font-bold"></i>
+          </label>
+          <ul
+            tabindex="0"
+            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+          >
+            <li id="home-btn">
+              <a><i class="fa-solid fa-house"></i>Home</a>
+            </li>
+            <li>
+              <a><i class="fa-solid fa-heart"></i> WishList</a>
+            </li>
+            <li>
+              <a><i class="fa-solid fa-trash"></i> Recycle Bin</a>
+            </li>
+            <li>
+              <!-- drawer open button here -->
+              <label for="my-drawer-4" class="drawer-button"
+                ><i class="fa-solid fa-cart-shopping"></i> Cart</label
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- drawer here -->
+
+    <div class="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content scroll-bar">
+        <!-- Page content here -->
+        <h1 class="text-center font-bold text-3xl my-5 text-rose-400">NEW ON PIXEL STORE</h1>
+
+        <!-- home page -->
+
+        <div id="home-page" style="display: block">
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+            id="homepage-content"
+          >
+            <!-- cards are here -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- wishlist page -->
+        <div style="display: none" id="wishlist-page">
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+          >
+            <!-- wishlist page content here -->
+            <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="https://placeimg.com/400/225/arch"
+                  alt="Shoes"
+                  class="rounded-lg w-full"
+                />
+              </figure>
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Shoes!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-red-800"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="mt-2 flex justify-between">
+                  <!-- modal open button -->
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- recycle bin page -->
+        <div>
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+            style="display: none"
+            id="recycle-page"
+          >
+            <!-- recycle bin page content here -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="drawer-side">
+        <label for="my-drawer-4" class="drawer-overlay"></label>
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-300 text-base-content">
+          <!-- Sidebar content here -->
+          <h1 class="text-center font-semibold text-xl mb-5">CART ITEMS</h1>
+
+          <!-- cart items are here -->
+          <div>
+            <div id="cart-items-container"></div>
+
+            <!-- clear cart button -->
+            <button
+              onclick="handleClear()"
+              class="w-1/2 btn bg-red-600 border-0 hover:bg-red-700 btn-sm mx-auto block my-2"
+            >
+              CLEAR CART
+            </button>
+
+            <!-- price calculations are here -->
+            <div class="bg-slate-600 text-white shadow-lg p-4 rounded-md mt-10">
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>PRODUCT COUNT : </span>
+                <span class="text-white" id="product-count">$0</span>
+              </p>
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>PRICE : </span
+                ><span class="text-white" id="price">$0</span>
+              </p>
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>TAX : </span
+                ><span class="text-white" id="tax-count">$0</span>
+              </p>
+              <hr />
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>TOTAL PRICE : </span
+                ><span class="text-white" id="total-price">$0</span>
+              </p>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <!-- details modal -->
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label
+          for="my-modal-3"
+          class="btn btn-sm btn-circle absolute right-2 top-2"
+          >✕</label
+        >
+        <!-- all modal informations are here -->
+        <div id="modal-info">
+          <!-- modal imgage -->
+        </div>
+      </div>
+    </div>
+
+   <!-- footer section -->
+   <footer class="footer p-10 bg-neutral text-neutral-content"><div class="relative place-self-center">
+      <!-- <span class="text-xl md:text-5xl ml-2 font-bold text-center mb-6">PIXEL STORE</span> -->
+        <div class="flex text-white items-center">
+          <img src="./images/logo.png" class="w-16 md:w-16 sm:w-16 mb-3" alt=""/>
+          <span class="text-xl md:text-5xl ml-2 font-bold text-center mb-6">PIXEL STORE</span>
+        </div>
+        <img src="/_next/static/media/blog-post-form@80.ceafc576054bfafd93f4075abebc771f.jpg" alt="" class="absolute top-px sm:left-auto sm:right-0 left-1/4 dark:hidden max-w-none" width="476" decoding="async">
+        <img src="/_next/static/media/blog-post-form-dark@90.4b182b17aa21af970219f8fd47331cda.jpg" alt="" class="absolute top-px -left-1/4 sm:left-0 hidden dark:block max-w-none" width="1429" decoding="async">
+        <section class="relative py-3 border-t border-slate-200 dark:border-slate-200/5">
+        <h2 class="text-xl font-semibold text-white tracking-tight dark:text-white">Get all of our updates directly to your&nbsp;inbox.<br>Sign up for our newsletter.</h2>
+          <div class="mt-2 max-w-md">
+          <form action="https://app.convertkit.com/forms/3181881/subscriptions" method="post" class="flex flex-wrap -mx-2">
+          <div class="px-2 grow-[9999] basis-64 mt-3">
+          <div class="group relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-6 h-full absolute inset-y-0 left-3 text-slate-400 pointer-events-none group-focus-within:text-sky-500 dark:group-focus-within:text-slate-400">
+          <path d="M5 7.92C5 6.86 5.865 6 6.931 6h10.138C18.135 6 19 6.86 19 7.92v8.16c0 1.06-.865 1.92-1.931 1.92H6.931A1.926 1.926 0 0 1 5 16.08V7.92Z"></path>
+          <path d="m6 7 6 5 6-5"></path></svg>
+          <input type="email" name="email_address" required="" autocomplete="email" aria-label="Email address" class="appearance-none shadow rounded-md ring-1 ring-slate-900/5 leading-5 sm:text-sm border border-transparent py-2 placeholder:text-slate-400 pl-12 pr-3 block w-full text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-700/20 dark:ring-slate-200/20 dark:focus:ring-sky-500 dark:text-white" placeholder="Subscribe via email"></div></div><div class="px-2 grow flex mt-3">
+          <button type="submit" class="bg-sky-500 flex-auto shadow text-white rounded-md text-sm border-y border-transparent py-2 font-semibold px-3 hover:bg-sky-600 dark:hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-300 dark:focus:ring-offset-slate-900 dark:focus:ring-sky-700">Subscribe</button></div></form></div></section>
+        </div>
+    </footer>
+  <!-- footer section -->
+    <script src="./js/script.js"></script>
+  </body>
+</html>
